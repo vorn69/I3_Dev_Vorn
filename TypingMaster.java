@@ -1,41 +1,62 @@
 import java.util.Scanner;
 
 public class TypingMaster {
+    static Scanner scanner = new Scanner(System.in);
+    static String registeredUser = "";
+    static String registeredPass = "";
+
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
         boolean running = true;
-
         while (running) {
-            // Display the menu
-            System.out.println("---------- Welcome to I3 Typing Master v2026 ----------");
-            System.out.println("To begin, please select one of the following options:");
-            System.out.println("  1. Login");
-            System.out.println("  2. Register");
-            System.out.println("  3. Exit");
+            System.out.println("\n---------- Welcome to I3 Typing Master v2026 ----------");
+            System.out.println("1. Login\n2. Register\n3. Exit");
             System.out.print("Choose an option: ");
-
-            // Read user input
             String choice = scanner.nextLine();
 
-            // Handle logic based on selection
             switch (choice) {
-                case "1":
-                    System.out.println("\n[Redirecting to Login...]\n");
-                    // Add login logic here
-                    break;
-                case "2":
-                    System.out.println("\n[Opening Registration...]\n");
-                    // Add registration logic here
-                    break;
-                case "3":
-                    System.out.println("\nThank you for using I3 Typing Master. Goodbye!");
-                    running = false;
-                    break;
-                default:
-                    System.out.println("\nError: Invalid selection. Please try again.\n");
-                    break;
+                case "1": login(); break;
+                case "2": register(); break;
+                case "3": running = false; break;
+                default: System.out.println("Invalid option.");
             }
         }
-        scanner.close();
     }
+
+    public static void register() {
+        System.out.println("\n---------- New User Registration ----------");
+        System.out.print("Input a unique username (blank to cancel): ");
+        String u = scanner.nextLine();
+        if (u.isEmpty()) return;
+
+        System.out.print("Input password: ");
+        String p = scanner.nextLine();
+        System.out.print("Input confirm password: ");
+        String cp = scanner.nextLine();
+
+        if (p.equals(cp)) {
+            registeredUser = u;
+            registeredPass = p;
+            System.out.println("Registration Successful!");
+        } else {
+            System.out.println("Passwords do not match!");
+        }
+    }
+
+    public static void login() {
+        System.out.println("\n---------- Authentication ----------");
+        System.out.print("Username (blank to cancel): ");
+        String u = scanner.nextLine();
+        if (u.isEmpty()) return;
+
+        System.out.print("Password: ");
+        String p = scanner.nextLine();
+
+        if (u.equals(registeredUser) && p.equals(registeredPass)) {
+            System.out.println("Login Successful! Welcome, " + registeredUser + "!");
+        } else {
+            System.out.println("Invalid credentials.");
+        }
+    }
+
+
 }
