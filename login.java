@@ -1,6 +1,6 @@
 import java.util.ArrayList;
 
-public class AuthService {
+public class login {
     private ArrayList<User> userList = new ArrayList<>();
 
     public boolean addUser(String u, String p) {
